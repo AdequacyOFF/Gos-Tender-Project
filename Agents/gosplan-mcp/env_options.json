@@ -1,0 +1,82 @@
+{
+  "environment_variables": [
+    {
+      "name": "LOG_LEVEL",
+      "type": "string",
+      "default": "INFO",
+      "description": "Уровень логирования (DEBUG, INFO, WARNING, ERROR, CRITICAL)",
+      "required": false,
+      "validation": {
+        "enum": ["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"]
+      },
+      "example": "INFO"
+    },
+    {
+      "name": "MCP_HOST",
+      "type": "string",
+      "default": "0.0.0.0",
+      "description": "Хост HTTP транспорта MCP",
+      "required": true,
+      "validation": {
+        "format": "hostname"
+      },
+      "example": "0.0.0.0"
+    },
+    {
+      "name": "MCP_PORT",
+      "type": "integer",
+      "default": 8000,
+      "description": "Порт HTTP транспорта MCP",
+      "required": true,
+      "validation": {
+        "min": 1,
+        "max": 65535
+      },
+      "example": 8000
+    },
+    {
+      "name": "GOSPLAN_BASE_URL",
+      "type": "string",
+      "default": "https://v2test.gosplan.info",
+      "description": "Базовый URL для запросов к ГосПлан API",
+      "required": false,
+      "validation": {
+        "format": "uri"
+      },
+      "example": "https://v2test.gosplan.info"
+    },
+    {
+      "name": "GOSPLAN_TIMEOUT",
+      "type": "number",
+      "default": 20,
+      "description": "Таймаут HTTP-запросов к ГосПлан, секунды",
+      "required": false,
+      "validation": {
+        "min": 1,
+        "max": 120
+      },
+      "example": 20
+    },
+    {
+      "name": "GOSPLAN_PURCHASES_LIMIT",
+      "type": "integer",
+      "default": 9,
+      "description": "Ограничение на количество закупок за один вызов инструмента",
+      "required": false,
+      "validation": {
+        "min": 1,
+        "max": 50
+      },
+      "example": 9
+    }
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "description": "Описание переменных окружения для MCP ГосПлан",
+    "usage": {
+      "docker": "Указывайте переменные через -e или --env-file",
+      "local": "Создайте .env в корне проекта или экспортируйте переменные в окружение",
+      "example": ".env.example содержит примеры всех переменных"
+    }
+  }
+}
