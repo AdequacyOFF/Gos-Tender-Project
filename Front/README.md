@@ -74,7 +74,7 @@ docker-compose -f docker-compose.dev.yml up
 docker-compose up -d
 ```
 
-Приложение будет доступно по адресу: http://localhost:8080
+Приложение будет доступно по адресу: http://localhost:3030
 
 Для просмотра логов:
 ```bash

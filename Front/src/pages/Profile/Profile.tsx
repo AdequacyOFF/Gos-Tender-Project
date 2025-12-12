@@ -16,7 +16,7 @@ export const Profile = () => {
   const [companies, setCompanies] = useState<SavedCompany[]>([]);
   const [agentClient] = useState(() => new AgentClient(
     generateSessionId(),
-    'https://31fd7d3f-2580-4179-b86a-3b5125118293-agent.ai-agent.inference.cloud.ru'
+    import.meta.env.VITE_PROFILE_AGENT_BASE_URL
   ));
   const messagesEndRef = useRef<HTMLDivElement>(null);
 

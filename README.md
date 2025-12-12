@@ -25,7 +25,7 @@
 2. **Поднять PostgreSQL**
 
     ```bash
-    docker compose -f db/docker-compose.yaml up -d
+    docker compose -f Agents/db/docker-compose.yaml up -d
     ```
 
 3. **Подготовить env-файлы**
@@ -107,45 +107,45 @@
 4. **Собрать образы**
     
     ```bash
-    cd db-mcp && docker buildx build --platform linux/amd64 -t db-mcp -f Dockerfile ..
+    cd db-mcp && docker buildx build --platform linux/amd64 -t db-mcp -f Agents/Dockerfile ..
     ```
     
     ```bash
-    cd codes-mcp && docker buildx build --platform linux/amd64 -t codes-mcp -f Dockerfile ..
+    cd codes-mcp && docker buildx build --platform linux/amd64 -t codes-mcp -f Agents/Dockerfile ..
     ```
     
     ```bash
-    cd gosplan-mcp && docker buildx build --platform linux/amd64 -t gosplan-mcp -f Dockerfile ..
+    cd gosplan-mcp && docker buildx build --platform linux/amd64 -t gosplan-mcp -f Agents/Dockerfile ..
     ```
     
     ```bash
-    cd agent-profiler && docker buildx build --platform linux/amd64 -t agent-profiler -f Dockerfile ..
+    cd agent-profiler && docker buildx build --platform linux/amd64 -t agent-profiler -f Agents/Dockerfile ..
     ```
     
     ```bash
-    cd agent-purchaser && docker buildx build --platform linux/amd64 -t agent-purchaser -f Dockerfile ..
+    cd agent-purchaser && docker buildx build --platform linux/amd64 -t agent-purchaser -f Agents/Dockerfile ..
     ```
 
 5. **Запустить сервисы**
     
     ```bash
-    docker run --rm --network host --env-file env/db-mcp.env db-mcp
+    docker run --rm --network host --env-file Agents/env/db-mcp.env db-mcp
     ```
     
     ```bash
-    docker run --rm --network host --env-file env/codes-mcp.env codes-mcp
+    docker run --rm --network host --env-file Agents/env/codes-mcp.env codes-mcp
     ```
     
     ```bash
-    docker run --rm --network host --env-file env/gosplan-mcp.env gosplan-mcp
+    docker run --rm --network host --env-file Agents/env/gosplan-mcp.env gosplan-mcp
     ```
     
     ```bash
-    docker run --rm --network host --env-file env/agent-profiler.env agent-profiler
+    docker run --rm --network host --env-file Agents/env/agent-profiler.env agent-profiler
     ```
     
     ```bash
-    docker run --rm --network host --env-file env/agent-purchaser.env agent-purchaser
+    docker run --rm --network host --env-file Agents/env/agent-purchaser.env agent-purchaser
     ```
 
 ### MCP-сервисы (инструменты)
@@ -165,21 +165,31 @@
 ## Front
 1. **Требования**
 
-   - Docker и Docker Compose (для запуска в контейнерах)
+   Docker и Docker Compose (для запуска в контейнерах)
+
+2. **Настройка переменных окружения**
+    - Создать файл _.env_
+         ```bash
+         cp Front/.env.example Front/.env
+         ```
+    - При необходимости изменить _baseUrl`ы_ для связи с агентами:
+   
+      (**VITE_PROFILE_AGENT_BASE_URL** и **VITE_EXCHANGE_AGENT_BASE_URL**)
 
 
-1. **Режим разработки (Docker с hot reload)**
+3. **Режим разработки (Docker с hot reload)**
     
     ```bash
-    docker-compose -f docker-compose.dev.yml up
+    docker compose -f Front/docker-compose.dev.yml up
     ```
     Приложение будет доступно по адресу: http://localhost:5173
 
-2. **Производственный режим (Docker)**
+4. **Производственный режим (Docker)**
     
     ```bash
-    docker-compose up -d
+    docker compose -f Front/docker-compose.yml up -d
     ```
-    Приложение будет доступно по адресу: http://localhost:8080
+    Приложение будет доступно по адресу: http://localhost:3030
+
 
 **_P.S. Подробнее о работе и вариантах развертывания в README.md каждого проекта_**

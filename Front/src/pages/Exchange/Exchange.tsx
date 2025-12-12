@@ -17,7 +17,7 @@ export const Exchange = () => {
   const [companies, setCompanies] = useState<SavedCompany[]>([]);
   const [agentClient] = useState(() => new AgentClient(
     generateSessionId(),
-    'https://25855856-ed62-4327-8321-92831b4810bd-agent.ai-agent.inference.cloud.ru'
+    import.meta.env.VITE_EXCHANGE_AGENT_BASE_URL
   ));
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
